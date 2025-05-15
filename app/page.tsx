@@ -17,7 +17,9 @@ export default function Home() {
         <header className="flex items-center justify-between p-6 md:p-8">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <Image src="/images/rgv-logo.png" alt="RGV Logo" width={120} height={60} className="h-auto w-24" />
+            <h1 className="text-2xl font-bold text-white">
+              RISHI
+            </h1>
           </Link>
 
           {/* Navigation */}
@@ -28,29 +30,6 @@ export default function Home() {
                   The Project
                 </Link>
               </li>
-              <li>
-                <Link href="#sneak-peek" className="text-sm uppercase tracking-widest text-gray-300 hover:text-white">
-                  Sneak Peek
-                </Link>
-              </li>
-              <li>
-                <Link href="#roadmap" className="text-sm uppercase tracking-widest text-gray-300 hover:text-white">
-                  Road Map
-                </Link>
-              </li>
-              <li>
-                <Link href="#faqs" className="text-sm uppercase tracking-widest text-gray-300 hover:text-white">
-                  FAQs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#join"
-                  className="rounded-full bg-white/10 px-6 py-2 text-sm uppercase tracking-widest text-white backdrop-blur-sm hover:bg-white/20"
-                >
-                  Join Us
-                </Link>
-              </li>
             </ul>
           </nav>
 
@@ -58,11 +37,8 @@ export default function Home() {
           <MobileMenu />
         </header>
 
-        {/* Main Content */}
-        <div className="flex-1"></div>
-
         {/* Social Media Sidebar */}
-        <div className="fixed left-4 top-1/2 z-20 -translate-y-1/2 space-y-6">
+        <div className="fixed top-0 z-10 flex h-screen flex-col justify-center space-y-10 border-r-2 border-white p-4 bg-white/10 backdrop-blur-md">
           <Link href="#" className="block text-white/70 transition-all hover:text-white">
             <Discord className="h-6 w-6" />
           </Link>
