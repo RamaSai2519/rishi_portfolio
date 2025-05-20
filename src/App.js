@@ -11,9 +11,18 @@ const App = () => {
     'https://images.unsplash.com/photo-1438761681033-6461ffad8d80',
     'https://images.unsplash.com/photo-1454023492550-5696f8ff10e1',
     'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429',
+    'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
+    'https://images.unsplash.com/photo-1465101046530-73398c7f28ca',
+    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308',
+    'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e',
+    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c',
+    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80',
+    'https://images.unsplash.com/photo-1454023492550-5696f8ff10e1',
+    'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429',
   ];
   const [curtainUp, setCurtainUp] = useState(false);
   const [showCurtain, setShowCurtain] = useState(true);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleCurtainClick = () => {
     setCurtainUp(true);
@@ -37,7 +46,7 @@ const App = () => {
           onClick={handleCurtainClick}
           onTransitionEnd={handleCurtainTransitionEnd}
         >
-          <div className='flex items-center justify-center h-full'>
+          <div className='flex items-start justify-center h-full'>
             <h1 className="text-6xl text-white font-bold text-center mt-10">
               RISHI'S COLLECTION
             </h1>
@@ -62,7 +71,9 @@ const App = () => {
           <img
             src={photo}
             alt={`${index + 1}`}
-            className="object-cover w-full min-h-screen cursor-pointer transition-transform duration-200 ease-in-out hover:scale-95"
+            className={`object-cover min-h-screen hover:scale-x-105 cursor-pointer transition-all duration-1000 ease-in-out ${expandedIndex === index ? 'w-[50vw] z-20' : 'w-full z-10'}`}
+            style={{ maxWidth: '50vw', maxHeight: '100vh' }}
+            onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
           />
         </div>
       ))}
