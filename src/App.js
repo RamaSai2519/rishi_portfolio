@@ -1,10 +1,8 @@
-import Page from './components/Page';
-import ImageModal from './components/ImageModal';
-import React from 'react';
+import { useState } from 'react';
+import { DownOutlined } from '@ant-design/icons';
 
 const App = () => {
   const photos = [
-    // Replace these URLs with your own images
     'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
     'https://images.unsplash.com/photo-1465101046530-73398c7f28ca',
     'https://images.unsplash.com/photo-1519125323398-675f0ddb6308',
@@ -14,43 +12,60 @@ const App = () => {
     'https://images.unsplash.com/photo-1454023492550-5696f8ff10e1',
     'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429',
   ];
+  const [curtainUp, setCurtainUp] = useState(false);
+  const [showCurtain, setShowCurtain] = useState(true);
 
-  const [modalOpen, setModalOpen] = React.useState(false);
-  const [selectedPhoto, setSelectedPhoto] = React.useState(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(null);
-
-  const handleImageClick = (photo, index) => {
-    setSelectedPhoto(photo);
-    setSelectedIndex(index);
-    setModalOpen(true);
+  const handleCurtainClick = () => {
+    setCurtainUp(true);
   };
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    setSelectedPhoto(null);
-    setSelectedIndex(null);
+  const handleCurtainTransitionEnd = () => {
+    if (curtainUp) setShowCurtain(false);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center">
+
+      {showCurtain && (
+        <div
+          className={`absolute top-0 left-0 w-full h-full transition-transform duration-1000 ease-in-out z-50 ${curtainUp ? 'translate-y-[-100%]' : 'translate-y-0'}`}
+          style={{
+            backgroundImage: "url('/images/bg_main.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+          onClick={handleCurtainClick}
+          onTransitionEnd={handleCurtainTransitionEnd}
+        >
+          <div className='flex items-center justify-center h-full'>
+            <h1 className="text-6xl text-white font-bold text-center mt-10">
+              RISHI'S COLLECTION
+            </h1>
+            <DownOutlined className='fixed bottom-10 text-4xl font-bold text-white animate-bounce' />
+          </div>
+        </div>
+      )}
+
       {photos.map((photo, index) => (
-        <div key={index} className="flex w-full items-center justify-center">
-          <Page>
-            <img
-              src={photo}
-              alt={`${index + 1}`}
-              className="object-cover w-full min-h-screen cursor-pointer transition-transform duration-200 ease-in-out hover:scale-95"
-              onClick={() => handleImageClick(photo, index)}
-            />
-          </Page>
+        <div
+          key={index}
+          className={`flex w-full items-center justify-center transition-transform duration-1000 ${curtainUp
+            ? index % 2 === 0
+              ? 'animate-slide-in-top'
+              : 'animate-slide-in-bottom'
+            : 'opacity-0 translate-y-0'
+            }`}
+          style={{
+            transitionDelay: curtainUp ? `${index * 5000}ms` : '0ms',
+          }}
+        >
+          <img
+            src={photo}
+            alt={`${index + 1}`}
+            className="object-cover w-full min-h-screen cursor-pointer transition-transform duration-200 ease-in-out hover:scale-95"
+          />
         </div>
       ))}
-      <ImageModal
-        isOpen={modalOpen}
-        photo={selectedPhoto}
-        title={`Photo ${selectedIndex !== null ? selectedIndex + 1 : ''}`}
-        onClose={handleCloseModal}
-      />
     </div>
   );
 }

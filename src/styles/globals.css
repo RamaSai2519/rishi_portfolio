@@ -3,29 +3,29 @@
 @import 'tailwindcss/utilities';
 
 body {
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html .dark {
-background-color: #141414;
+  background-color: #141414;
 }
 
 ::-webkit-scrollbar {
-width: 5px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-background: #888;
+  background: #888;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-background: #f1f1f1;
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-track {
-background: #555;
+  background: #555;
 }
 
 .toggle-dark-mode {
@@ -423,4 +423,36 @@ body {
 
 .slide-out {
   animation: slide-out 0.5s ease-in forwards;
+}
+
+@keyframes slideInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in-top {
+  animation: slideInTop 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-in-bottom {
+  animation: slideInBottom 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
